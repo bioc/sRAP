@@ -1,0 +1,212 @@
+%\VignetteIndexEntry{sRAP Vignette}
+%\VignetteKeywords{Gene Expression Pipeline}
+%\VignettePackage{sRAP}
+\documentclass{article}
+
+\usepackage{Sweave}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{cite}
+
+\begin{document}
+\title{sRAP: Simplified RNA-Seq Analysis Pipeline}
+\author{Charles Warden}
+\maketitle
+
+\section{Introduction}
+This package provides a pipeline for gene expression analysis.
+The normalization function is specific for RNA-Seq analysis, but all other
+functions will work with any type of gene expression data.  The output from each function
+is created in a separate subfolder.  Please see the workflow below:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=80mm]{sRAP_Workflow.pdf}
+\end{figure}
+
+
+Normalization will take RPKM expression values, round the RPKM values below a given cutoff,
+and perform a log$_2$ data transformation.  Quality control metrics (Principal Component Analysis, Hierarchical
+Clustering, Sample Histograms and Box-Plots, and Descriptive Statistics) can be provided for these normalized
+expression values.  These approximately normal expression distributions are then subject to differential 
+expression.  Differentially expressed gene lists are provided in Excel files and data can be visualized using
+a heatmap for all differentially expressed genes or a box-plot for a specific gene.  BD-Func can then be 
+used to calculate functional enrichment (either for fold-change values between two groups or using the normalized
+expression values).
+
+\section{Data}
+
+RPKM expression value for MiSeq samples were calculated using TopHat and Cufflinks from raw .fastq files from
+GSE37703.  A template script for this sample preparation (run\textunderscore RNA\textunderscore Seq\textunderscore v2.pl)
+is available \href{https://sites.google.com/site/cwarden45/scripts}{here}.
+This example dataset contains two groups, each with 3 replicates.  The dataset is truncated for testing purposes.
+
+<<inputVariables>>=
+library("sRAP")
+library("WriteXLS")
+library("gplots")
+library("pls")
+library("qvalue")
+library("ROCR")
+
+dir <- system.file("extdata", package="sRAP")
+expression.table <- file.path(dir,"MiSeq_cufflinks_genes_truncate.txt")
+sample.table <- file.path(dir,"MiSeq_Sample_Description.txt")
+project.folder <- getwd()
+project.name <- "MiSeq"
+@ 
+The code for this example assumes all files are in the current working directory.
+However, you can specify the input and output files in any location (using
+the complete file path).
+
+\section{Data Normalization}
+To normalize RNA-Seq RPKM values, run the following function 
+<<normalization>>=
+expression.mat <- RNA.norm(expression.table, project.name, project.folder)
+@
+RNA-Seq data is normalized by rounding RPKM (Read Per Kilobase per Million reads, \cite{rpkm}) values by a specified value (default=0.1),
+followed by a log$_2$ transformation.  This matches the gene expression strategy described in
+\cite{round}.
+
+The output is standard data frame with samples in rows and genes in columns.
+
+An Excel file containing the normalized expression values is created in the "Raw\textunderscore Data" folder.
+
+\section{Quality Control Figures}
+To create quality control figures, run the following function 
+<<qc>>=
+RNA.qc(sample.table, expression.mat, project.name,
+		project.folder, plot.legend=F,
+		color.palette=c("green","orange"))
+@ 
+The input is a matrix of normalized expression values, possibly created from
+the RNA.norm function.
+
+This function creates quality control figures within the "QC" subfolder.
+Quality control figures / tables include: Principal Components Analysis 
+(figure for 1st two principal components, table for all
+principal components), Sample Dendrogram, Sample Histogram, Box-Plot for Sample Distribution,
+ as well as a table of descriptive statistics for each sample (median,
+top/bottom quartile, maximum, and minimum).  Please see the example figures displayed below:
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.qc PCA Plot}}
+\centering
+\includegraphics[width=110mm]{MiSeq_pca.pdf}
+\end{figure}
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.qc Dendrogram}}
+\centering
+\includegraphics[width=110mm]{MiSeq_cluster.pdf}
+\end{figure}
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.qc Sample Histogram}}
+\centering
+\includegraphics[width=110mm]{MiSeq_hist.pdf}
+\end{figure}
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.qc Sample Box-Plot}}
+\centering
+\includegraphics[width=110mm]{MiSeq_box_plot.pdf}
+\end{figure}
+
+This step is optional - this function is not needed for downstream analysis.  However,
+this function is likely to be useful to identifying outliers, overall quality of the data, etc.
+
+\section{Differential Expression}
+To define differentially expressed genes, run the following function 
+<<diffExpression>>=
+stat.table <- RNA.deg(sample.table, expression.mat,
+			project.name, project.folder, box.plot=FALSE,
+			ref.group=T, ref="scramble",
+			method="aov", color.palette=c("green","orange"))
+@ 
+The input is a matrix of normalized expression values, possibly created from
+the RNA.norm function.
+
+The function returns a table of differential expression statistics for all genes.
+
+In all cases, p-values can be calculated via linear regression of ANOVA, and false-discovery
+rates (FDR) are calculated by the method of \cite{fdr}.  It is assumed that expression values are
+on a log$_2$ scale, as described in \cite{round}.
+
+If the primary variable (defined in the second column of the sample description table) is
+a factor with two groups and a specified reference, then fold-change values can also used to
+select differentially expressed genes (along with p-value and FDR values).
+
+The function creates lists of differentially expressed genes (as well as a table of 
+statistics for all genes) in Excel files.  A heatmap of differentially expressed genes is
+also displayed .  If desired, the user can also create box-plots for
+all differentially expressed genes.  Please see the example figures below:
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.deg Heatmap}}
+\centering
+\includegraphics[width=110mm]{MiSeq_heatmap.pdf}
+\end{figure}
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.deg Box-Plot}}
+\centering
+\includegraphics[width=110mm]{MiSeq_TGFB1_box_plot.pdf}
+\end{figure}
+
+An Excel file containing the table of differential expression statistics for all genes is created 
+in the "Raw\textunderscore Data" folder.  All other outputfiles are created in the "DEG" folder (DEG stands for "Differenitally
+Expressed Genes").
+
+\section{Functional Enrichment}
+To identify functional categories subject to differential expression, run the following function 
+<<bdFunc>>=
+#data(bdfunc.enrichment.human)
+#data(bdfunc.enrichment.mouse)
+RNA.bdfunc.fc(stat.table, plot.flag=FALSE,
+		project.name, project.folder, species="human")
+
+RNA.bdfunc.signal(expression.mat, sample.table, plot.flag=FALSE,
+		project.name, project.folder, species="human")
+@ 
+This is an implementation of the Bi-Directional FUNCtional enrichment (BD-Func \cite{bdfunc}) algorithm.
+Briefly, p-values quantifying the difference between up- and down-regulated genes can be calculated
+via t-test, Mann-Whitney U test, or K-S test.  If desired, false discovery rates (FDR) can be calculated
+using either the method of Benjamini and Hochberg \cite{fdr} or the Storey q-value \cite{qvalue}.
+
+The input for the RNA.bdfunc.fc function is a table of differential expression statisics (like that created
+by the RNA.deg function).  If desired, the this function can create density plots for all gene lists
+(see below).
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.bdfunc.fc Density Plot}}
+\centering
+\includegraphics[width=110mm]{GLI1_UP_V1_fc.pdf}
+\end{figure}
+
+The input for the RNA.bdfunc.signal function is a table of normalized expression values (like that created
+by the RNA.norm function).  If desired, the this function can create box-plots for enrichment scores across
+all gene lists (see below).
+
+\begin{figure}[H]
+{\bf \large \underline{RNA.bdfunc.signal Box-Plot}}
+\centering
+\includegraphics[width=110mm]{GLI1_UP_V1_signal.pdf}
+\end{figure}
+
+In both cases, the output files are created with in the "BD-Func" subfolder.  The goal of BD-Func is
+to calculate functional enrichment by comparing lists of activated and inhibited genes for a functional category,
+pathway, and/or network.
+
+This package includes pre-defined enrichment lists are available for human and mouse gene symbols.  The human
+enrichment list is based upon Gene Ontology \cite{go} and MSigDB \cite{msigdb} gene lists.  The mouse enrichment list is based upon
+Gene Ontology categories.  Additional gene lists will need to be imported using the enrichment.file parameter.
+
+This step is optional - there are no other functions that depend on the results of this analysis.
+
+\bibliography{sRAP}{}
+\bibliographystyle{unsrt}
+
+\end{document}

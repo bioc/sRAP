@@ -1,0 +1,18 @@
+citHeader("When using RNA.bdfunc.fc or RNA.bdfunc.signal, please cite the BD-Func publication.  For all other functions, please site the fold-change paper.")
+
+citEntry(entry = "Article",
+         "author" = "Warden CD, Yuan Y-C, and Wu X.",
+         "title" = "Optimal Calculation of RNA-Seq Fold-Change Values",
+         journal = "in preparation",
+		 year = "2013",
+         textVersion = "Warden CD et al., Optimal Calculation of RNA-Seq Fold-Change Values, in preparation"
+) 
+
+citEntry(entry = "Article",
+         "author" = "Warden CD, Kanaya N, Chen S, and Yuan Y-C.",
+         "title" = "BD-Func: A Streamlined Algorithm for Predicting Activation and Inhibition of Pathways",
+         journal = "peerJ",
+         year = "2013",
+         pages = "e159",
+         textVersion = "Warden CD et al., BD-Func: A Streamlined Algorithm for Predicting Activation and Inhibition of Pathways, peerJ (2013) 1:e159"
+) 

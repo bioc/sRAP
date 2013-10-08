@@ -1,0 +1,11 @@
+importFrom(WriteXLS, WriteXLS)
+importFrom(gplots, heatmap.2)
+importFrom(pls, stdize)
+importFrom(qvalue, qvalue)
+importFrom(ROCR, prediction, performance, plot)
+
+export(RNA.norm,
+		RNA.qc,
+		RNA.deg,
+		RNA.bdfunc.fc,
+		RNA.bdfunc.signal)
