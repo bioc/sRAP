@@ -1,7 +1,3 @@
-library("WriteXLS")
-library("gplots")
-library("pls")
-
 annova.pvalue <- function(y, x.mat)
 {
 	#print(arr)
@@ -182,7 +178,7 @@ lm.annova.pvalue <- function(y, x.mat)
 					rownames(temp.matrix) <- NULL
 					print(dim(temp.matrix))
 					#print(dim(temp.matrix))
-					#stat.table <- data.frame(stat.table,temp.matrix)
+					stat.table <- data.frame(stat.table,temp.matrix)
 				}#end for(i in 1:ncol(stat.pvalues))
 		}#end else
 	
@@ -208,7 +204,9 @@ lm.annova.pvalue <- function(y, x.mat)
 			WriteXLS("down.genes", ExcelFileName = xlsfile)
 			
 			any.change.genes <- na.omit(diff.genes[abs(fc.values) > log2.fc.cutoff,])
+			print(dim(any.change.genes))
 			any.change.genes <- any.change.genes[order(any.change.genes[[3]]),]
+			print(dim(any.change.genes))
 			xlsfile <- file.path(deg.folder, paste(project.name,"_DEG.xlsx",sep=""))
 			WriteXLS("any.change.genes", ExcelFileName = xlsfile)
 			
