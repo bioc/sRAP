@@ -1,14 +1,14 @@
 Package: sRAP
 Type: Package
 Title: Simplified RNA-Seq Analysis Pipeline
-Version: 1.0.0
+Version: 1.0.1
 Date: 2013-08-21
 Author: Charles Warden
 Maintainer: Charles Warden <cwarden@coh.org>
-Imports: WriteXLS, gplots, pls, ROCR, qvalue
+Depends: WriteXLS
+Imports: gplots, pls, ROCR, qvalue
 Description: This package provides a pipeline for gene expression analysis (primarily for RNA-Seq data).  The normalization function is specific for RNA-Seq analysis, but all other functions (Quality Control Figures, Differential Expression and Visualization, and Functional Enrichment via BD-Func) will work with any type of gene expression data.
 License: GPL-3
 LazyLoad: yes
-biocViews: GeneExpression, RNAseq, Microarray, Preprocessing,
-        QualityControl, Statistics, DifferentialExpression,
-        Visualization, GeneSetEnrichment, GO
+biocViews: GeneExpression, RNAseq, Microarray, Preprocessing, QualityControl,
+        Statistics, DifferentialExpression, Visualization, GeneSetEnrichment, GO

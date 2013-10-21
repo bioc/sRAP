@@ -58,7 +58,6 @@ Charles Warden <cwarden@coh.org>
 \examples{
 	
 library("sRAP")
-library("WriteXLS")
 
 dir <- system.file("extdata", package="sRAP")
 expression.table <- file.path(dir,"MiSeq_cufflinks_genes_truncate.txt")

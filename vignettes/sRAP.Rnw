@@ -45,11 +45,6 @@ This example dataset contains two groups, each with 3 replicates.  The dataset i
 
 <<inputVariables>>=
 library("sRAP")
-library("WriteXLS")
-library("gplots")
-library("pls")
-library("qvalue")
-library("ROCR")
 
 dir <- system.file("extdata", package="sRAP")
 expression.table <- file.path(dir,"MiSeq_cufflinks_genes_truncate.txt")

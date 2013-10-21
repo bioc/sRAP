@@ -1,6 +1,3 @@
-library(qvalue)
-library("ROCR")
-
 ttest.pvalue <- function(arr)
 	{
 		pos.text <- arr[1]

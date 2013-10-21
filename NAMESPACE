@@ -1,8 +1,8 @@
-importFrom(WriteXLS, WriteXLS)
-importFrom(gplots, heatmap.2)
-importFrom(pls, stdize)
-importFrom(qvalue, qvalue)
-importFrom(ROCR, prediction, performance, plot)
+import(WriteXLS)
+import(gplots)
+import(pls)
+import(qvalue)
+import(ROCR)
 
 export(RNA.norm,
 		RNA.qc,

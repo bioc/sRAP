@@ -1,5 +1,3 @@
-library("WriteXLS")
-
 `RNA.norm` <-function (input.file, project.name, project.folder, RPKM.cutoff = 0.1)
 {
 	data.folder<-file.path(project.folder,"Raw_Data")
