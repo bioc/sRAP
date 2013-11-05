@@ -1,2 +1,4 @@
 v1.0.1
 Modify package calling in manual, NAMESPACE, and DESCRIPTION; Fixed bug in multivariate differential expression code
+v1.0.2
+Fix bug for 1-variable analysis without reference

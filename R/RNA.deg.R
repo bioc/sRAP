@@ -215,7 +215,7 @@ lm.annova.pvalue <- function(y, x.mat)
 	else
 		{
 			diff.genes <- na.omit(diff.genes)
-			diff.genes<- any.change.genes[order(diff.genes[[2]]),]
+			diff.genes<- diff.genes[order(diff.genes[[2]]),]
 			xlsfile <- file.path(deg.folder, paste(project.name,"_DEG.xlsx",sep=""))
 			WriteXLS("diff.genes", ExcelFileName = xlsfile)
 		}
