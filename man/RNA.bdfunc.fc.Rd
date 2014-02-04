@@ -117,4 +117,6 @@ RNA.bdfunc.fc(stat.table, project.name, plot.flag=FALSE, project.folder, species
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }

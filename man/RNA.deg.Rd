@@ -107,4 +107,6 @@ stat.table <- RNA.deg(sample.table, expression.mat, project.name, project.folder
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }
