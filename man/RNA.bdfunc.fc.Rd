@@ -94,7 +94,7 @@ Statistical significance for genomewide studies.
 }
 
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{

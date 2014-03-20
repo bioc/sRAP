@@ -1,0 +1,4 @@
+tracking_id	class_code	nearest_ref_id	gene_id	gene_short_name	tss_id	locus	length	coverage	FPKM	FPKM_conf_lo	FPKM_conf_hi	FPKM_status
+C9orf152	-	-	C9orf152	C9orf152	TSS8511	chr9:112961845-112970413	-	-	0	0	0	OK
+ELMO2	-	-	ELMO2	ELMO2	TSS21391	chr20:44994689-45035271	-	-	11.0285	9.11557	12.9415	OK
+RPS11	-	-	RPS11	RPS11	TSS5579	chr19:49999633-50002944	-	-	578.636	539.288	617.985	OK

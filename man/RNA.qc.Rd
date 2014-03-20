@@ -38,7 +38,7 @@ RNA.qc(sample.file, expression.table, project.name, project.folder, plot.legend 
 }
 
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{
