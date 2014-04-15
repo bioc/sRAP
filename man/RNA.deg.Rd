@@ -83,10 +83,11 @@ RNA.deg(sample.file, expression.table, project.name, project.folder, log2.fc.cut
 \references{
 [1] Warden CD, Yuan Y-C, and Wu X. (2013).
 Optimal Calculation of RNA-Seq Fold-Change Values.
-\emph{in preparation},
+\emph{Int J Comput Bioinfo In Silico Model},
+2(6): 285-292
 }
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{
@@ -107,4 +108,6 @@ stat.table <- RNA.deg(sample.table, expression.mat, project.name, project.folder
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }

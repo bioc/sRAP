@@ -38,7 +38,7 @@ RNA.qc(sample.file, expression.table, project.name, project.folder, plot.legend 
 }
 
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{
@@ -59,5 +59,7 @@ RNA.qc(sample.table, expression.mat, project.name, project.folder, plot.legend=F
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }
 

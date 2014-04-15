@@ -8,4 +8,5 @@ export(RNA.norm,
 		RNA.qc,
 		RNA.deg,
 		RNA.bdfunc.fc,
-		RNA.bdfunc.signal)
+		RNA.bdfunc.signal,
+		RNA.prepare.input)

@@ -215,62 +215,71 @@ lm.annova.pvalue <- function(y, x.mat)
 	else
 		{
 			diff.genes <- na.omit(diff.genes)
-			diff.genes<- any.change.genes[order(diff.genes[[2]]),]
+			diff.genes<- diff.genes[order(diff.genes[[2]]),]
 			xlsfile <- file.path(deg.folder, paste(project.name,"_DEG.xlsx",sep=""))
 			WriteXLS("diff.genes", ExcelFileName = xlsfile)
 		}
 	
 	diff.gene.names <- t(diff.genes[[1]])
-	
-	diff.expr <- expression.values[match(diff.gene.names,gene.names,nomatch=0), ]
-	if(box.plot)
+	if(length(diff.gene.names) == 0)
 		{
-			box.folder<-file.path(deg.folder,"Box_Plots")
-			dir.create(box.folder, showWarnings=FALSE)
-			
-			for(i in 1:length(diff.gene.names))
-				{
-					gene.name <- diff.gene.names[i]
-					gene.expr <- diff.expr[i,]
-					
-					box.file <- file.path(box.folder, paste(project.name,gene.name,"box_plot.pdf",sep="_"))
-					pdf(file = box.file)
-					boxplot(gene.expr ~ sample.group, col=color.palette)
-					dev.off()
-				}#end for(i in 1:length(diff.gene.names))
-		}#end if(box.plot)
-	
-	diff.expr <- stdize(t(diff.expr))
-	rownames(diff.expr) <- rep("",nrow(diff.expr))
-	if(ncol(diff.expr) > 20)
-		{
-			colnames(diff.expr) <- rep("",ncol(diff.expr))
-		}
-	
-	if(typeof(sample.group) == "double")
-		{
-			labelColors <- NULL
+			print("There are no differentially expressed genes!")
+			print(warnings())
+			return(NULL)
 		}
 	else
 		{
-			groups <- levels(sample.group)
-			print(paste("Group: ",groups,sep=""))
-			print(paste("Color: ",color.palette[1:length(groups)], sep=""))
-			
-			clusMember <- sample.group
-			labelColors <- as.character(clusMember)
-			for (i in 1:length(groups))
+			diff.expr <- expression.values[match(diff.gene.names,gene.names,nomatch=0), ]
+			print(dim(diff.expr))
+			if(box.plot)
 				{
-					#print(heatmap.label.colors[i])
-					labelColors[clusMember == groups[i]] = color.palette[i]
+					box.folder<-file.path(deg.folder,"Box_Plots")
+					dir.create(box.folder, showWarnings=FALSE)
+					
+					for(i in 1:length(diff.gene.names))
+						{
+							gene.name <- diff.gene.names[i]
+							gene.expr <- diff.expr[i,]
+							
+							box.file <- file.path(box.folder, paste(project.name,gene.name,"box_plot.pdf",sep="_"))
+							pdf(file = box.file)
+							boxplot(gene.expr ~ sample.group, col=color.palette)
+							dev.off()
+						}#end for(i in 1:length(diff.gene.names))
+				}#end if(box.plot)
+			
+			diff.expr <- stdize(t(diff.expr))
+			rownames(diff.expr) <- rep("",nrow(diff.expr))
+			if(ncol(diff.expr) > 20)
+				{
+					colnames(diff.expr) <- rep("",ncol(diff.expr))
 				}
-		}
-	#print(dim(diff.expr))
-	heatmap.file <- file.path(deg.folder, paste(project.name,"_heatmap.pdf",sep=""))
-	pdf(file = heatmap.file)
-	heatmap.2(diff.expr, col=redgreen(33),density.info="none", trace="none", key=F, RowSideColors=labelColors)
-	dev.off()
-	
-	print(warnings())
-	return(stat.table)
+			
+			if(typeof(sample.group) == "double")
+				{
+					labelColors <- NULL
+				}
+			else
+				{
+					groups <- levels(sample.group)
+					print(paste("Group: ",groups,sep=""))
+					print(paste("Color: ",color.palette[1:length(groups)], sep=""))
+					
+					clusMember <- sample.group
+					labelColors <- as.character(clusMember)
+					for (i in 1:length(groups))
+						{
+							#print(heatmap.label.colors[i])
+							labelColors[clusMember == groups[i]] = color.palette[i]
+						}
+				}
+			#print(dim(diff.expr))
+			heatmap.file <- file.path(deg.folder, paste(project.name,"_heatmap.pdf",sep=""))
+			pdf(file = heatmap.file)
+			heatmap.2(diff.expr, col=redgreen(33),density.info="none", trace="none", key=F, RowSideColors=labelColors)
+			dev.off()
+			
+			print(warnings())
+			return(stat.table)		
+		}#end else
 }#end def RNA.deg

@@ -103,7 +103,7 @@ Statistical significance for genomewide studies.
 
 }
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{
@@ -125,4 +125,6 @@ RNA.bdfunc.signal(expression.mat, sample.table, plot.flag=FALSE, project.name, p
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }

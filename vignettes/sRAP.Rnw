@@ -69,6 +69,9 @@ The output is standard data frame with samples in rows and genes in columns.
 
 An Excel file containing the normalized expression values is created in the "Raw\textunderscore Data" folder.
 
+If you do not already have a table of RPKM/FPKM expression values, you can use the RNA.prepare.input() function to create such a file.
+Please see help(RNA.prepare.input) for more details.
+
 \section{Quality Control Figures}
 To create quality control figures, run the following function 
 <<qc>>=
