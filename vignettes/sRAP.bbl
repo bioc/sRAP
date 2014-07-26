@@ -8,7 +8,7 @@ Mortazavi~A et~al.
 \bibitem{round}
 Warden~CD et~al.
 \newblock {Optimal Calculation of RNA-Seq Fold-Change Values}.
-\newblock {\em in preparation}.
+\newblock {\em Int J Comput Bioinfo In Silico Model}, 2:285-292, 2014
 
 \bibitem{fdr}
 Benjamini Y and Hochberg Y.
@@ -21,7 +21,7 @@ Benjamini Y and Hochberg Y.
 Warden~CD et~al.
 \newblock {BD-Func: A Streamlined Algorithm for Predicting Activation and
   Inhibition of Pathways}.
-\newblock {\em peerJ}, in press, 2013.
+\newblock {\em peerJ}, 1:e159, 2013.
 
 \bibitem{qvalue}
 Storey JD and Tibshirani R.

@@ -56,7 +56,7 @@ lm.annova.pvalue <- function(y, x.mat)
 		}
 }#end def annova.pvalue
 
-`RNA.deg` <-function (sample.file, expression.table, project.name, project.folder, log2.fc.cutoff=0.58, pvalue.cutoff=0.05, fdr.cutoff=0.05, box.plot = TRUE, ref.group=FALSE, ref="none",method = "lm", color.palette = c("red","blue","green","orange","purple","cyan","pink","maroon","yellow","grey","black",colors()))
+`RNA.deg` <-function (sample.file, expression.table, project.name, project.folder, log2.fc.cutoff=0.58, pvalue.cutoff=0.05, fdr.cutoff=0.05, box.plot = TRUE, ref.group=FALSE, ref="none",method = "lm", color.palette = c("green","orange","purple","cyan","pink","maroon","yellow","grey","black",colors()), legend.status=FALSE)
 {
 	deg.folder<-file.path(project.folder,"DEG")
 	dir.create(deg.folder, showWarnings=FALSE)
@@ -276,7 +276,7 @@ lm.annova.pvalue <- function(y, x.mat)
 			#print(dim(diff.expr))
 			heatmap.file <- file.path(deg.folder, paste(project.name,"_heatmap.pdf",sep=""))
 			pdf(file = heatmap.file)
-			heatmap.2(diff.expr, col=redgreen(33),density.info="none", trace="none", key=F, RowSideColors=labelColors)
+			heatmap.2(diff.expr, col=colorpanel(33, low="blue", mid="black", high="red"), density.info="none", key=legend.status, RowSideColors=labelColors, trace="none")
 			dev.off()
 			
 			print(warnings())

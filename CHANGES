@@ -16,3 +16,5 @@ v.1.4.0
 Bump up version to indicate release version.
 v.1.4.1
 Add MSigDB c7 (v4.0) to human BD-Func signature list
+v.1.4.2
+Update citation information; change heatmap to red-blue scale; add heatmap legend options
