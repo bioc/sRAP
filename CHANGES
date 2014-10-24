@@ -1,2 +1,22 @@
 v1.0.1
 Modify package calling in manual, NAMESPACE, and DESCRIPTION; Fixed bug in multivariate differential expression code
+v1.0.2
+Fix bug for 1-variable analysis without reference
+v1.0.3
+Exit pipeline when no differentially expressed genes are identified
+v1.2.0
+Update citation; bump up version
+v1.2.1
+Update contact info
+v1.2.2
+Add discussion group links
+v.1.3.0
+Add function to tabulate RPKM values; update citation information
+v.1.4.0
+Bump up version to indicate release version.
+v.1.4.1
+Add MSigDB c7 (v4.0) to human BD-Func signature list
+v.1.4.2
+Update citation information; change heatmap to red-blue scale; add heatmap legend options
+v.1.5.0
+Bump up version

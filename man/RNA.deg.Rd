@@ -15,7 +15,7 @@ for each individual differentially expressed gene.  The efficacy of this
 Output files will be created in the "DEG" and "Raw_Data" subfolders.
 }
 \usage{
-RNA.deg(sample.file, expression.table, project.name, project.folder, log2.fc.cutoff = 0.58, pvalue.cutoff = 0.05, fdr.cutoff = 0.05, box.plot = TRUE, ref.group = FALSE, ref = "none", method = "lm", color.palette = c("red", "blue", "green", "orange", "purple", "cyan", "pink", "maroon", "yellow", "grey", "black", colors()))
+RNA.deg(sample.file, expression.table, project.name, project.folder, log2.fc.cutoff = 0.58, pvalue.cutoff = 0.05, fdr.cutoff = 0.05, box.plot = TRUE, ref.group = FALSE, ref = "none", method = "lm", color.palette = c("green", "orange", "purple", "cyan", "pink", "maroon", "yellow", "grey", "black", colors()), legend.status = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -68,6 +68,10 @@ RNA.deg(sample.file, expression.table, project.name, project.folder, log2.fc.cut
 	Colors for primary variable (specified in the second column of the sample file).
 	If the primary variable is a continuous variable, this parameter is ignored.
 }
+  \item{legend.status}{
+	Logical value.
+	Should legend be added to heatmap?
+}
 }
 \value{
 	Data frame containing differential expression statistics.
@@ -83,10 +87,11 @@ RNA.deg(sample.file, expression.table, project.name, project.folder, log2.fc.cut
 \references{
 [1] Warden CD, Yuan Y-C, and Wu X. (2013).
 Optimal Calculation of RNA-Seq Fold-Change Values.
-\emph{in preparation},
+\emph{Int J Comput Bioinfo In Silico Model},
+2(6): 285-292
 }
 \author{
-Charles Warden <cwarden@coh.org>
+Charles Warden <cwarden45@gmail.com>
 }
 
 \examples{
@@ -97,14 +102,18 @@ dir <- system.file("extdata", package="sRAP")
 expression.table <- file.path(dir,"MiSeq_cufflinks_genes_truncate.txt")
 sample.table <- file.path(dir,"MiSeq_Sample_Description.txt")
 project.folder <- getwd()
-project.name <- "MiSeq"
+project.name <- "MiSeq_DEG"
 
 expression.mat <- RNA.norm(expression.table, project.name, project.folder)
 
-stat.table <- RNA.deg(sample.table, expression.mat, project.name, project.folder, box.plot=FALSE, ref.group=TRUE, ref="scramble",method="aov", color.palette=c("green","orange"))
+stat.table <- RNA.deg(sample.table, expression.mat, project.name, project.folder, box.plot=FALSE, ref.group=TRUE, ref="scramble",method="aov", color.palette=c("green","orange"), legend.status=TRUE)
+
+#stat.table <- RNA.deg(sample.table, expression.mat, project.name, project.folder, box.plot=FALSE, #ref.group=TRUE, ref="scramble",method="aov", color.palette=c("green","orange"))
 
 }
 
 \seealso{
 sRAP goes through an entire analysis for an example dataset provided with the sRAP package.
+
+Please post questions on the sRAP discussion group: http://sourceforge.net/p/bdfunc/discussion/srap/
 }
