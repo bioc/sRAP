@@ -3,9 +3,10 @@ citHeader("When using RNA.bdfunc.fc or RNA.bdfunc.signal, please cite the BD-Fun
 citEntry(entry = "Article",
          "author" = "Warden CD, Yuan Y-C, and Wu X.",
          "title" = "Optimal Calculation of RNA-Seq Fold-Change Values",
-         journal = "in preparation",
-		 year = "2013",
-         textVersion = "Warden CD et al., Optimal Calculation of RNA-Seq Fold-Change Values, in preparation"
+         journal = "Int J Comput Bioinfo In Silico Model",
+		 year = "2014",
+		 pages = "285-292",
+         textVersion = "Warden CD et al., Optimal Calculation of RNA-Seq Fold-Change Values, Int J Comput Bioinfo In Silico Model (2014) 2(6): 285-292"
 ) 
 
 citEntry(entry = "Article",
