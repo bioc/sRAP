@@ -268,7 +268,7 @@ lm.annova.pvalue <- function(y, x.mat)
 	#print(dim(diff.expr))
 	heatmap.file <- file.path(deg.folder, paste(project.name,"_heatmap.pdf",sep=""))
 	pdf(file = heatmap.file)
-	heatmap.2(diff.expr, col=redgreen(33),density.info="none", trace="none", key=F, RowSideColors=labelColors)
+	heatmap.2(diff.expr, col=colorpanel(33, low="blue", mid="black", high="red"),density.info="none", trace="none", key=F, RowSideColors=labelColors)
 	dev.off()
 	
 	print(warnings())
