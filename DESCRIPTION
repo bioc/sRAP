@@ -1,7 +1,7 @@
 Package: sRAP
 Type: Package
 Title: Simplified RNA-Seq Analysis Pipeline
-Version: 1.8.0
+Version: 1.9.0
 Date: 2013-08-21
 Author: Charles Warden
 Maintainer: Charles Warden <cwarden45@gmail.com>
