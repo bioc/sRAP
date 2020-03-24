@@ -1,7 +1,7 @@
 Package: sRAP
 Type: Package
 Title: Simplified RNA-Seq Analysis Pipeline
-Version: 1.27.0
+Version: 1.27.1
 Date: 2013-08-21
 Author: Charles Warden
 Maintainer: Charles Warden <cwarden45@gmail.com>
@@ -12,3 +12,4 @@ License: GPL-3
 LazyLoad: yes
 biocViews: GeneExpression, RNAseq, Microarray, Preprocessing, QualityControl,
         Statistics, DifferentialExpression, Visualization, GeneSetEnrichment, GO
+PackageStatus: Deprecated
